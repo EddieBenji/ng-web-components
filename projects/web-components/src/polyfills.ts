@@ -57,8 +57,10 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js';  // Included with Angular CLI.
-
+// TODO: When you try to import the zone.js to something higher than "zone.js": "~0.11.4", uncomment this import (and comment the other
+//  one) and verify if the web component is imported successfully in the other angular app.
+// import 'zone.js';  // Included with Angular CLI.
+import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
