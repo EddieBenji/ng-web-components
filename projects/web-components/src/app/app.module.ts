@@ -1,20 +1,25 @@
-import { DoBootstrap, Injector, NgModule } from '@angular/core';
+import { DoBootstrap, Injector, NgModule, Type } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormComponent } from './form/form.component';
 import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
     declarations: [
-        PopupComponent
+        PopupComponent,
+        FormComponent
     ],
     imports: [
         BrowserModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ReactiveFormsModule
     ],
     providers: [],
     entryComponents: [
-        PopupComponent
+        PopupComponent,
+        FormComponent
     ]
 })
 export class AppModule implements DoBootstrap {
@@ -26,9 +31,14 @@ export class AppModule implements DoBootstrap {
      * ngModule decorator.
      */
     ngDoBootstrap(): void {
+        this.createCustomEl(PopupComponent, 'popup-element');
+        this.createCustomEl(FormComponent, 'form-element');
+    }
+
+    private createCustomEl(component: Type<any>, tagName: string): void {
         // Convert `PopupComponent` to a custom element.
-        const PopupElement = createCustomElement(PopupComponent, { injector: this.injector });
+        const customEl = createCustomElement(component, { injector: this.injector });
         // Register the custom element with the browser.
-        customElements.define('popup-element', PopupElement);
+        customElements.define(tagName, customEl);
     }
 }

@@ -13,4 +13,4 @@ const outputDir2 = path.normalize(path.join(__dirname, '..', 'ng9-app-host', 'sr
 merge(files, path.normalize(path.join(outputDir, 'web-components.js')));
 merge(files, path.normalize(path.join(outputDir2, 'web-components.js')));
 
-console.log(`File generated in: ${outputDir}`);
+console.log(`File generated in: ${outputDir} and ${outputDir2}`);
