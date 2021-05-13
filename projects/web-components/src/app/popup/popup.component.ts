@@ -44,7 +44,9 @@ export class PopupComponent implements OnInit {
             data: {
                 firstName: 'Eduardo',
                 lastName: 'Canche',
-                location: 'Mexico'
+                location: 'Mexico',
+                position: 'Engineer',
+                message: this._message
             }
         });
     }

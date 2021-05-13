@@ -19,16 +19,16 @@ import { PopupComponent } from './popup/popup.component';
 })
 export class AppModule implements DoBootstrap {
     constructor(private injector: Injector) {
-        // Convert `PopupComponent` to a custom element.
-        const PopupElement = createCustomElement(PopupComponent, { injector });
-        // Register the custom element with the browser.
-        customElements.define('popup-element', PopupElement);
     }
 
+    /**
+     * With this approach (Creating an ng app with projects), we must implement the DoBootstrap and remove the bootstrap array from the
+     * ngModule decorator.
+     */
     ngDoBootstrap(): void {
-        // // Convert `PopupComponent` to a custom element.
-        // const PopupElement = createCustomElement(PopupComponent, { injector: this.injector });
-        // // Register the custom element with the browser.
-        // customElements.define('popup-element', PopupElement);
+        // Convert `PopupComponent` to a custom element.
+        const PopupElement = createCustomElement(PopupComponent, { injector: this.injector });
+        // Register the custom element with the browser.
+        customElements.define('popup-element', PopupElement);
     }
 }
