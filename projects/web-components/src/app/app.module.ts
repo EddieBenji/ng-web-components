@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { DoBootstrap, Injector, NgModule, Type } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,14 +8,15 @@ import { FormComponent } from './form/form.component';
 import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
-    declarations: [
-        PopupComponent,
-        FormComponent
-    ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule
+    ],
+    declarations: [
+        PopupComponent,
+        FormComponent
     ],
     providers: [],
     entryComponents: [
