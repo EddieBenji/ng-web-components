@@ -41,6 +41,6 @@ export class AppModule implements DoBootstrap {
         // Convert `PopupComponent` to a custom element.
         const customEl = createCustomElement(component, { injector: this.injector });
         // Register the custom element with the browser.
-        customElements.define(tagName, customEl);
+        customElements.get(tagName) || customElements.define(tagName, customEl);
     }
 }
