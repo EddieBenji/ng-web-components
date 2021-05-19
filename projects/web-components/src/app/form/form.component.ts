@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ExampleForm } from '../models/example-form.model';
 
 type UIElementParams = { params: any, url: string };
 const URL_APIS = {
@@ -19,6 +20,7 @@ export class FormComponent implements OnInit {
         forwarders: new FormControl(null, Validators.required),
         serverIp: new FormControl(null)
     });
+    editItem: ExampleForm | null = null;
 
     @Input()
     set UIElements(UIElements: UIElementParams) {
@@ -28,17 +30,31 @@ export class FormComponent implements OnInit {
         }
     }
 
+    @Input()
+    set itemToEdit(item: ExampleForm | null) {
+        if (item !== null) {
+            this.form.patchValue(item);
+            this.editItem = item;
+        }
+    }
+
     dropDownItems = [ '' ];
 
-    @Output() saveForm = new EventEmitter<any>();
+    @Output() saveForm = new EventEmitter<ExampleForm>();
+    @Output() updateForm = new EventEmitter<ExampleForm>();
+
     @Output() doGetRequest = new EventEmitter<{ url: string }>();
     @Output() doPostRequest = new EventEmitter<{ url: string, body: any }>();
 
     constructor() {
     }
 
-    whenOnSave() {
-        this.saveForm.emit(this.form.value);
+    whenOnSubmit() {
+        if (this.editItem === null) {
+            this.saveForm.emit(this.form.value);
+        } else {
+            this.updateForm.emit({ ...this.form.value, id: this.editItem.id });
+        }
     }
 
     ngOnInit(): void {
